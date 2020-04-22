@@ -21,7 +21,7 @@ public class User {
         FEMALE
     }
 
-    public UUID getUiserId() {
+    public UUID getUserId() {
         return uiserId;
     }
 
