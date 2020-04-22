@@ -16,7 +16,7 @@ public class User {
         this.age = age;
     }
 
-    enum Gender {
+    public enum Gender {
         MALE,
         FEMALE
     }
