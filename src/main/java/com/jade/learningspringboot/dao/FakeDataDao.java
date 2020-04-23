@@ -1,9 +1,11 @@
 package com.jade.learningspringboot.dao;
 
 import com.jade.learningspringboot.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository //because the purpose of this class is to get some data from a repo(or db in this case)
 public class FakeDataDao implements UserDao {
 
     private static Map<UUID, User> db;

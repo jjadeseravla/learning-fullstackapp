@@ -3,16 +3,21 @@ package com.jade.learningspringboot.service;
 import com.jade.learningspringboot.dao.FakeDataDao;
 import com.jade.learningspringboot.dao.UserDao;
 import com.jade.learningspringboot.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class UserService {
 
     private UserDao userDao;
 
-    public UserService() {
-        this.userDao = new FakeDataDao();
+    @Autowired //this will take fakeDao and get line 15 userDao to be instantiated
+    //with our fakeDao
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public List<User> getAllUsers() {
