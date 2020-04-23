@@ -4,13 +4,13 @@ import java.util.UUID;
 
 public class User {
 
-    private final UUID uiserId;
+    private final UUID userId;
     private final String name;
     private final Gender gender;
     private final Integer age;
 
-    public User(UUID uiserId, String name, Gender gender, Integer age) {
-        this.uiserId = uiserId;
+    public User(UUID userId, String name, Gender gender, Integer age) {
+        this.userId = userId;
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -22,7 +22,7 @@ public class User {
     }
 
     public UUID getUserId() {
-        return uiserId;
+        return userId;
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "uiserId=" + uiserId +
+                "uiserId=" + userId +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +

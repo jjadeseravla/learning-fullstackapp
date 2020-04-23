@@ -29,7 +29,7 @@ public class FakeDataDao implements UserDao {
     @Override
     public Optional<User> selectUserByUserId(UUID userId) {
         //letting you know it may return null of no user with that id
-        return Optional.ofNullable((db.get(userId));
+        return Optional.ofNullable(db.get(userId));
     }
 
     @Override
