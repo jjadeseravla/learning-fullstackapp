@@ -25,6 +25,7 @@ class FakeDataDaoTest {
     @Test
     void shouldSelectAllUsers() {
         List<User> users = fakeDataDao.selectAllUsers();
+
         assertThat(users).hasSize(1);
 
         User user = users.get(0);
@@ -49,6 +50,7 @@ class FakeDataDaoTest {
 
         //liamOptional is from DB and liam is the User liam of this test
         Optional<User> liamOptional = fakeDataDao.selectUserByUserId(userLiamId);
+
         assertThat(liamOptional.isPresent()).isTrue();
         assertThat(liamOptional.get()).isEqualToComparingFieldByField(liam);
     }
@@ -63,14 +65,51 @@ class FakeDataDaoTest {
 
 
     @Test
-    void updateUser() {
+    void shouldUpdateUser() {
+        UUID userRemelId = fakeDataDao.selectAllUsers().get(0).getUserId();
+        User remel = new User(userRemelId,
+                "Remel",
+                User.Gender.MALE,
+                19);
+
+        fakeDataDao.updateUser(remel);
+        Optional<User> remelOptional = fakeDataDao.selectUserByUserId(userRemelId);
+
+        assertThat(remelOptional.isPresent()).isTrue();
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(1);
+        assertThat(remelOptional.get()).isEqualToComparingFieldByField(remel);
     }
 
     @Test
-    void deleteUserByUserId() {
+    void shouldDeleteUserByUserId() {
+        UUID userMalissaId = UUID.randomUUID();
+        User malissa = new User(userMalissaId,
+                "Malissa",
+                User.Gender.FEMALE,
+                42);
+        fakeDataDao.insertUser(userMalissaId, malissa);
+
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
+
+        fakeDataDao.deleteUserByUserId(userMalissaId);
+
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(1);
+        assertThat(fakeDataDao.selectUserByUserId(userMalissaId).isPresent()).isFalse();
     }
 
     @Test
-    void insertUser() {
+    void shouldInsertUser() {
+        UUID userCarolineId = UUID.randomUUID();
+        User caroline = new User(userCarolineId,
+                "Caroline",
+                User.Gender.FEMALE,
+                23);
+        fakeDataDao.insertUser(userCarolineId, caroline);
+
+        fakeDataDao.insertUser(userCarolineId, caroline);
+
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
+        assertThat(fakeDataDao.selectUserByUserId(userCarolineId).isPresent()).isTrue();
+        assertThat(fakeDataDao.selectUserByUserId(userCarolineId).get()).isEqualToComparingFieldByField(caroline);
     }
 }
