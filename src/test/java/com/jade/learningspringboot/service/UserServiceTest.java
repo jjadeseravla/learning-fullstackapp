@@ -9,10 +9,12 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class UserServiceTest {
 
@@ -54,14 +56,25 @@ class UserServiceTest {
 
         User user = allUsers.get(0);
 
-        assertThat(user.getAge()).isEqualTo(37);
-        assertThat(user.getName()).isEqualTo("Liam");
-        assertThat(user.getGender()).isEqualTo(User.Gender.MALE);
-        assertThat(user.getUserId()).isNotNull();
+        assertUserFields(user);
     }
 
     @Test
     void shouldGetUser() {
+        UUID userLiamId = UUID.randomUUID();
+        User liam = new User(userLiamId,
+                "Liam",
+                User.Gender.MALE,
+                37);
+
+        given(mockFakeDataDao.selectUserByUserId(userLiamId)).willReturn(Optional.of(liam));
+        Optional<User> optionalLiam = userService.getUser(userLiamId);
+
+        assertThat(optionalLiam.isPresent()).isTrue();
+        
+        //assertThat(optionalLiam.get()).isEqualToComparingFieldByField(liam);
+        User user = optionalLiam.get();
+        assertUserFields(user);
     }
 
     @Test
@@ -74,5 +87,12 @@ class UserServiceTest {
 
     @Test
     void insertUser() {
+    }
+
+    private void assertUserFields(User user) {
+        assertThat(user.getAge()).isEqualTo(37);
+        assertThat(user.getName()).isEqualTo("Liam");
+        assertThat(user.getGender()).isEqualTo(User.Gender.MALE);
+        assertThat(user.getUserId()).isNotNull();
     }
 }
