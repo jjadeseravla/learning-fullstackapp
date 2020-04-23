@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,11 +22,11 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return null;
+        return userDao.selectAllUsers();
     }
 
-    public User getUser(UUID userId) {
-        return null;
+    public Optional<User> getUser(UUID userId) {
+         return userDao.selectUserByUserId(userId);
     }
 
     public int updateUser(User user) {
