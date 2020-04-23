@@ -4,6 +4,7 @@ import com.jade.learningspringboot.dao.FakeDataDao;
 import com.jade.learningspringboot.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -15,6 +16,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class UserServiceTest {
 
@@ -71,7 +73,7 @@ class UserServiceTest {
         Optional<User> optionalLiam = userService.getUser(userLiamId);
 
         assertThat(optionalLiam.isPresent()).isTrue();
-        
+
         //assertThat(optionalLiam.get()).isEqualToComparingFieldByField(liam);
         User user = optionalLiam.get();
         assertUserFields(user);
@@ -79,6 +81,29 @@ class UserServiceTest {
 
     @Test
     void shouldUpdateUser() {
+        UUID userLiamId = UUID.randomUUID();
+        User liam = new User(userLiamId,
+                "Liam",
+                User.Gender.MALE,
+                37);
+
+        given(mockFakeDataDao.selectUserByUserId(userLiamId)).willReturn(Optional.of(liam));
+        given(mockFakeDataDao.updateUser(liam)).willReturn(1);
+
+        //capture what user was sent
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+
+        int updateResult = userService.updateUser(liam);
+
+        verify(mockFakeDataDao).selectUserByUserId(userLiamId);
+        verify(mockFakeDataDao).updateUser(captor.capture());
+
+        assertThat(updateResult).isEqualTo(1);
+
+        //capture what user was sent
+        User user = captor.getValue();
+        assertUserFields(user);
+
     }
 
     @Test
