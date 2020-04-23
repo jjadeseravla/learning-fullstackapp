@@ -8,9 +8,9 @@ import java.util.*;
 @Repository //because the purpose of this class is to get some data from a repo(or db in this case)
 public class FakeDataDao implements UserDao {
 
-    private static Map<UUID, User> db;
+    private Map<UUID, User> db;
 
-    static {
+    public FakeDataDao() {
         UUID userId = UUID.randomUUID();
         db = new HashMap<>();
         db.put(userId,
