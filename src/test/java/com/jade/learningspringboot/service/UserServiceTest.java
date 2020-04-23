@@ -96,6 +96,7 @@ class UserServiceTest {
         int updateResult = userService.updateUser(liam);
 
         verify(mockFakeDataDao).selectUserByUserId(userLiamId);
+        //capture what user was sent
         verify(mockFakeDataDao).updateUser(captor.capture());
 
         assertThat(updateResult).isEqualTo(1);
@@ -107,11 +108,24 @@ class UserServiceTest {
     }
 
     @Test
-    void removeUser() {
+    void shouldRemoveUser() {
+        UUID userLiamId = UUID.randomUUID();
+        User liam = new User(userLiamId,
+                "Liam",
+                User.Gender.MALE,
+                37);
+
+        Optional<User> optionalLiam = userService.getUser(userLiamId);
+
+        given(mockFakeDataDao.selectUserByUserId(userLiamId)).willReturn(Optional.of(liam));
+        given(mockFakeDataDao.deleteUserByUserId(userLiamId)).willReturn(1);
+
+        assertThat(optionalLiam.isPresent()).isFalse();
+
     }
 
     @Test
-    void insertUser() {
+    void shouldInsertUser() {
     }
 
     private void assertUserFields(User user) {
