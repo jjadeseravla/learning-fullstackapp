@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class User {
 
-    private final UUID userId;
+    private UUID userId;
     private final String name;
     private final Gender gender;
     private final Integer age;
@@ -14,6 +14,10 @@ public class User {
         this.name = name;
         this.gender = gender;
         this.age = age;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public enum Gender {

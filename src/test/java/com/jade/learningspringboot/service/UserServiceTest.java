@@ -14,6 +14,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -120,12 +122,34 @@ class UserServiceTest {
         given(mockFakeDataDao.selectUserByUserId(userLiamId)).willReturn(Optional.of(liam));
         given(mockFakeDataDao.deleteUserByUserId(userLiamId)).willReturn(1);
 
+        //ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+
+        int deleteResult = userService.removeUser(userLiamId);
+
         assertThat(optionalLiam.isPresent()).isFalse();
+        assertThat(deleteResult).isEqualTo(1);
 
     }
 
     @Test
     void shouldInsertUser() {
+        User liam = new User(null,
+                "Liam",
+                User.Gender.MALE,
+                37);
+
+        given(mockFakeDataDao.insertUser(any(UUID.class), eq(liam))).willReturn(1);
+
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+
+        int insertResult = userService.insertUser(liam);
+
+        verify(mockFakeDataDao).insertUser(any(UUID.class), captor.capture());
+
+        User user = captor.getValue();
+
+        assertUserFields(user);
+        assertThat(insertResult).isEqualTo(1);
     }
 
     private void assertUserFields(User user) {
@@ -133,5 +157,6 @@ class UserServiceTest {
         assertThat(user.getName()).isEqualTo("Liam");
         assertThat(user.getGender()).isEqualTo(User.Gender.MALE);
         assertThat(user.getUserId()).isNotNull();
+        assertThat(user.getUserId()).isInstanceOf(UUID.class);
     }
 }

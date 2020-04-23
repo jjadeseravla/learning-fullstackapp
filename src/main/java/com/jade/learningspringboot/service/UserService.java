@@ -32,8 +32,7 @@ public class UserService {
     public int updateUser(User user) {
         Optional<User> optionalUser = getUser(user.getUserId());
         if(optionalUser.isPresent()) {
-            userDao.updateUser(user);
-            return 1;
+            return userDao.updateUser(user);
         } else {
             return -1;
         }
@@ -49,7 +48,9 @@ public class UserService {
     }
 
     public int insertUser(User user) {
-        return userDao.insertUser(UUID.randomUUID(), user);
+        UUID userId = UUID.randomUUID();
+        user.setUserId(userId);
+        return userDao.insertUser(userId, user);
     }
 
 }
