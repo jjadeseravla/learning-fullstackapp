@@ -55,6 +55,16 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Integer> insertNewUser(@RequestBody User user) { //@RequestBody takes the request body and map it inside this user
         int result = userService.insertUser(user);
+        return getIntegerResponseEntity(result);
+    }
+
+    @PutMapping
+    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+        int result = userService.updateUser(user);
+        return getIntegerResponseEntity(result);
+    }
+
+    private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
         if(result == 1) {
             return ResponseEntity.ok().build();
         }
