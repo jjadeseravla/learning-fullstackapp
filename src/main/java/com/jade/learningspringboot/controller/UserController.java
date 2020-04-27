@@ -34,10 +34,7 @@ public class UserController {
     public ResponseEntity<?> fetchUser(@PathVariable("userId") UUID userId) {
         //? cos i dont know if we are going to find this user or not
         Optional<User> optionalUser = userService.getUser(userId);
-        if (optionalUser.isPresent()) {
-            return ResponseEntity.ok(optionalUser.get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage("user" + userId + " not found"));
+        return optionalUser.<ResponseEntity<?>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage("user" + userId + " not found")));
     }
 
     class ErrorMessage {
