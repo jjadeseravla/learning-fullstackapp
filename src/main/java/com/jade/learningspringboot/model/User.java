@@ -1,27 +1,32 @@
 package com.jade.learningspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class User {
 
-    private UUID userId;
-    private String name;
-    private Gender gender;
-    private Integer age;
+    private final UUID userId;
+    private final String name;
+    private final Gender gender;
+    private final Integer age;
 
-    public User(UUID userId, String name, Gender gender, Integer age) {
+    public User(
+            @JsonProperty("userId") UUID userId,
+                @JsonProperty("name") String name,
+                @JsonProperty("gender") Gender gender,
+                @JsonProperty("age") Integer age) {
         this.userId = userId;
         this.name = name;
         this.gender = gender;
         this.age = age;
     }
 
-    public User() {
-
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public static User newUser(UUID userId, User user) {
+      return new User(userId,
+              user.getName(),
+              user.getGender(),
+              user.getAge());
     }
 
     public enum Gender {
