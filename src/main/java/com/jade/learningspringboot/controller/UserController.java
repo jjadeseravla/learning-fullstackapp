@@ -2,13 +2,11 @@ package com.jade.learningspringboot.controller;
 
 import com.jade.learningspringboot.model.User;
 import com.jade.learningspringboot.service.UserService;
+import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +50,15 @@ public class UserController {
         public void setErrorMessage(String errorMessage) {
             this.errorMessage = errorMessage;
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<Integer> insertNewUser(@RequestBody User user) { //@RequestBody takes the request body and map it inside this user
+        int result = userService.insertUser(user);
+        if(result == 1) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
 

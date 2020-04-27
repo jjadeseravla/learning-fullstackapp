@@ -5,15 +5,19 @@ import java.util.UUID;
 public class User {
 
     private UUID userId;
-    private final String name;
-    private final Gender gender;
-    private final Integer age;
+    private String name;
+    private Gender gender;
+    private Integer age;
 
     public User(UUID userId, String name, Gender gender, Integer age) {
         this.userId = userId;
         this.name = name;
         this.gender = gender;
         this.age = age;
+    }
+
+    public User() {
+
     }
 
     public void setUserId(UUID userId) {
