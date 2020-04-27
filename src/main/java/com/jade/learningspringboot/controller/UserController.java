@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,8 +25,10 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> fetchUsers() {
-        return userService.getAllUsers();
+    public List<User> fetchUsers(@QueryParam("gender") String gender) {
+        //eg if you want to find all the females you'd have the url .../users?gender=FEMALE etc
+        System.out.println(gender);
+        return userService.getAllUsers(Optional.ofNullable(gender));
     }
 
     @GetMapping(path = "{userId}") //a value that we will pass in the path

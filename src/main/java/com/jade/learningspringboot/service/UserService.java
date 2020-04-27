@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -21,8 +22,22 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getAllUsers() {
-        return userDao.selectAllUsers();
+    public List<User> getAllUsers(Optional<String> gender ) {
+        List<User> users = userDao.selectAllUsers();
+        if(!gender.isPresent()) {
+            return users;
+        }
+        //get a stream of these users
+        //check whether gender is what we have
+        try {
+            User.Gender theGender = User.Gender.valueOf(gender.get().toUpperCase());
+            //stream out the data
+            return users.stream() //getting a stream of the list of users
+                    .filter(user -> user.getGender().equals(theGender)) //filtering the data so its equal with the statement youve passed to the client, eg only FEMALES
+                    .collect(Collectors.toList()); //collecting the results from a stream back into a list
+        } catch (Exception e) {
+            throw new IllegalStateException("Invalid gender", e);
+        }
     }
 
     public Optional<User> getUser(UUID userId) {
