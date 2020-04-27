@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -60,7 +61,41 @@ class UserServiceTest {
 
         User user = allUsers.get(0);
 
-        assertUserFields(user);
+        assertLiamFields(user);
+    }
+
+    @Test
+    void shouldGetAllUsersByGender() {
+        UUID userLiamId = UUID.randomUUID();
+        User liam = new User(userLiamId,
+                "Liam",
+                User.Gender.MALE,
+                37);
+
+        UUID userAdaId = UUID.randomUUID();
+        User ada = new User(userAdaId,
+                "Ada",
+                User.Gender.FEMALE,
+                101);
+
+        //return a list of users
+        List<User> users = new ArrayList<>();
+        users.add(liam);
+        users.add(ada);
+
+        given(mockFakeDataDao.selectAllUsers()).willReturn(users);
+
+        List<User> filteredUsers = userService.getAllUsers(Optional.of("MALE"));
+
+        assertThat(filteredUsers).hasSize(1);
+        assertLiamFields(filteredUsers.get(0));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGenderIsInvalid() {
+        assertThatThrownBy(() -> userService.getAllUsers(Optional.of("gibberish")))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("Invalid gender");
     }
 
     @Test
@@ -78,7 +113,7 @@ class UserServiceTest {
 
         //assertThat(optionalLiam.get()).isEqualToComparingFieldByField(liam);
         User user = optionalLiam.get();
-        assertUserFields(user);
+        assertLiamFields(user);
     }
 
     @Test
@@ -105,7 +140,7 @@ class UserServiceTest {
 
         //capture what user was sent
         User user = captor.getValue();
-        assertUserFields(user);
+        assertLiamFields(user);
 
     }
 
@@ -148,11 +183,11 @@ class UserServiceTest {
 
         User user = captor.getValue();
 
-        assertUserFields(user);
+        assertLiamFields(user);
         assertThat(insertResult).isEqualTo(1);
     }
 
-    private void assertUserFields(User user) {
+    private void assertLiamFields(User user) {
         assertThat(user.getAge()).isEqualTo(37);
         assertThat(user.getName()).isEqualTo("Liam");
         assertThat(user.getGender()).isEqualTo(User.Gender.MALE);
