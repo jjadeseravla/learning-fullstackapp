@@ -64,6 +64,12 @@ public class UserController {
         return getIntegerResponseEntity(result);
     }
 
+    @DeleteMapping(path = "{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable("userId") UUID userId) {
+        int result = userService.removeUser(userId);
+        return getIntegerResponseEntity(result);
+    }
+
     private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
         if(result == 1) {
             return ResponseEntity.ok().build();
