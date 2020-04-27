@@ -18,7 +18,6 @@ import java.util.UUID;
 @RequestMapping(path = "/api/v1/users")
 public class UserController {
 
-    private static final java.util.UUID UUID = ;
     public UserService userService; //dependency injection
 
     @Autowired
@@ -31,15 +30,34 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping(path = "{}") //a value that we will pass in the path
+    @GetMapping(path = "{userId}") //a value that we will pass in the path
     public ResponseEntity<?> fetchUser(@PathVariable("userId") UUID userId) {
-    //? cos i dont know if we are going to find this user or not
+        //? cos i dont know if we are going to find this user or not
         Optional<User> optionalUser = userService.getUser(userId);
         if (optionalUser.isPresent()) {
             return ResponseEntity.ok(optionalUser.get());
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user" + userId + "no found");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage("user" + userId + " not found"));
     }
 
+    class ErrorMessage {
 
+        String errorMessage;
+
+        public ErrorMessage(String errorMessage) {
+            this.errorMessage = errorMessage;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
+
+        public void setErrorMessage(String errorMessage) {
+            this.errorMessage = errorMessage;
+        }
+    }
 }
+
+
+
+
