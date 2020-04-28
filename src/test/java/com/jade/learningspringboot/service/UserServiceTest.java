@@ -166,26 +166,26 @@ class UserServiceTest {
 
     }
 
-    @Test
-    void shouldInsertUser() {
-        User liam = new User(null,
-                "Liam",
-                User.Gender.MALE,
-                37);
-
-        given(mockFakeDataDao.insertUser(any(UUID.class), eq(liam))).willReturn(1);
-
-        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
-
-        int insertResult = userService.insertUser(liam);
-
-        verify(mockFakeDataDao).insertUser(any(UUID.class), captor.capture());
-
-        User user = captor.getValue();
-
-        assertLiamFields(user);
-        assertThat(insertResult).isEqualTo(1);
-    }
+//    @Test
+//    void shouldInsertUser() {
+//        User liam = new User(null,
+//                "Liam",
+//                User.Gender.MALE,
+//                37);
+//
+//        given(mockFakeDataDao.insertUser(any(UUID.class), eq(liam))).willReturn(1);
+//
+//        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+//
+//        int insertResult = userService.insertUser(liam);
+//
+//        verify(mockFakeDataDao).insertUser(any(UUID.class), captor.capture());
+//
+//        User user = captor.getValue();
+//
+//        assertLiamFields(user);
+//        assertThat(insertResult).isEqualTo(1);
+//    }
 
     private void assertLiamFields(User user) {
         assertThat(user.getAge()).isEqualTo(37);

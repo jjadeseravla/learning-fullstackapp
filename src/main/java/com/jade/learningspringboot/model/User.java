@@ -2,6 +2,7 @@ package com.jade.learningspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
@@ -48,6 +49,10 @@ public class User {
 
     public Integer getAge() {
         return age;
+    }
+
+    public int getDateofBirth() {
+        return LocalDate.now().minusYears(age).getYear();
     }
 
     @Override
