@@ -1,6 +1,7 @@
 package com.jade.learningspringboot;
 
 import com.jade.learningspringboot.controller.UserController;
+import com.jade.learningspringboot.controller.UserControllerResteasy;
 import com.jade.learningspringboot.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LearningSpringBootApplicationTests {
 
 	@Autowired
-	private UserController userController;
+	private UserControllerResteasy userControllerResteasy;
 
 	@Test
 	void itShouldFetchAllUsers() {
-		List<User> users = userController.fetchUsers(null);
+		List<User> users = userControllerResteasy.fetchUsers(null);
 		assertThat(users).hasSize(1);
 
 		User liam = new User(null,
