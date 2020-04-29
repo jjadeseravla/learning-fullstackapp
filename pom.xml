@@ -46,6 +46,23 @@
 			<version>2.3.4-RELEASE</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13-beta-2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.paypal.springboot/resteasy-spring-boot-starter -->
+		<dependency>
+			<groupId>com.paypal.springboot</groupId>
+			<artifactId>resteasy-spring-boot-starter</artifactId>
+			<version>2.3.3-RELEASE</version>
+		</dependency>
 
 	</dependencies>
 
