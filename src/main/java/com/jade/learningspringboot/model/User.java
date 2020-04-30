@@ -3,14 +3,25 @@ package com.jade.learningspringboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
 
     private final UUID userId;
+
+    @NotNull(message = "name required")
     private final String name;
+
+    @NotNull
     private final Gender gender;
+
+    @NotNull
+    @Max(value = 112)
+    @Min(value = 0)
     private final Integer age;
 
     public User(
