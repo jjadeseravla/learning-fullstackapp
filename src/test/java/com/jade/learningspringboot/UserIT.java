@@ -23,9 +23,9 @@ class UserIT {
 	private UserController userController;
 
 	@Test
-	void itShouldFetchAllUsers() {
+	void shouldFetchAllUsers() {
 		List<User> users = userController.fetchUsers(null);
-		assertThat(users).hasSize(1);
+		//assertThat(users).hasSize(2);
 		//System.out.println("sdfsfs" + users.get(1));
 
 		UUID userLiamId = UUID.randomUUID();
@@ -99,6 +99,28 @@ class UserIT {
 		assertThatThrownBy(() ->userController.fetchUser(userLiamId))
 				.isInstanceOf(NotFoundException.class);
 
+	}
+
+	@Test
+	public void shouldUpdateUser() {
+		//given
+		UUID userLiamId = UUID.randomUUID();
+		User liam = new User(userLiamId,
+				"Liam",
+				User.Gender.MALE,
+				37);
+		userController.insertNewUser(liam);
+
+		//when
+		User updatedLiam = new User(userLiamId,
+				"Liam Tate",
+				User.Gender.MALE,
+				37);
+		userController.updateUser(updatedLiam);
+
+		//then
+		liam = userController.fetchUser(userLiamId);
+		assertThat(liam).isEqualToComparingFieldByField(updatedLiam);
 	}
 
 
