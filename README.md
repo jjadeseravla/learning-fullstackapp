@@ -1,4 +1,4 @@
-# Learning SpringBoot and Testing
+# Learning SpringBoot, Testing and React
 
 Simple Restful app with tests
 
@@ -12,7 +12,7 @@ Package up app compile and generate .classes file and the Jar file you can deplo
 Run jar on the command line:
 ```java -jar learning-spring-boot-0.0.1-SNAPSHOT.jar```</br>
 If you want to override the specified port.  You can type this again with another port and have two instances of the app are running at the same time on different ports:
-```java -jar learning-spring-boor-0.0.1-SNAPSHOT.jar --server.port=5050```</br>
+```java -jar learning-spring-boot-0.0.1-SNAPSHOT.jar --server.port=5050```</br>
 
 ## To Do:
 - Front end!
