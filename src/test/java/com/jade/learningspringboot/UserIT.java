@@ -8,10 +8,12 @@ package com.jade.learningspringboot;
 		import org.springframework.boot.test.context.SpringBootTest;
 		import org.springframework.test.context.junit4.SpringRunner;
 
+		import javax.ws.rs.NotFoundException;
 		import java.util.List;
 		import java.util.UUID;
 
 		import static org.assertj.core.api.Assertions.assertThat;
+		import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -77,6 +79,25 @@ class UserIT {
 
 		//then
 		assertThat(fetchLiam).isEqualToComparingFieldByField(liam);
+
+	}
+
+	@Test
+	public void shouldDeleteUser() {
+		//given
+		UUID userLiamId = UUID.randomUUID();
+		User liam = new User(userLiamId,
+				"Liam",
+				User.Gender.MALE,
+				37);
+		userController.insertNewUser(liam);
+
+		//when
+		userController.deleteUser(userLiamId);
+
+		//then
+		assertThatThrownBy(() ->userController.fetchUser(userLiamId))
+				.isInstanceOf(NotFoundException.class);
 
 	}
 
