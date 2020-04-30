@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.Optional;
@@ -35,12 +36,9 @@ public class UserController {
     }
 
     @GetMapping(path = "{userId}") //a value that we will pass in the path
-    public ResponseEntity<?> fetchUser(@PathVariable("userId") UUID userId) {
-        //? cos i dont know if we are going to find this user or not
-        Optional<User> optionalUser = userService.getUser(userId);
-        return optionalUser.<ResponseEntity<?>>map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(new ErrorMessage("user" + userId + " not found")));
+    public User fetchUser(@PathVariable("userId") UUID userId) {
+        return userService.getUser(userId)
+               .orElseThrow(() -> new NotFoundException("User " + userId + " not found")); //if i dont get the optional ill throw new exception
     }
 
     class ErrorMessage {
@@ -61,21 +59,18 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> insertNewUser(@Valid @RequestBody User user) { //@RequestBody takes the request body and map it inside this user
-        int result = userService.insertUser(user);
-        return getIntegerResponseEntity(result);
+    public void insertNewUser(@Valid @RequestBody User user) { //@RequestBody takes the request body and map it inside this user
+        userService.insertUser(user);
     }
 
     @PutMapping
-    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
-        int result = userService.updateUser(user);
-        return getIntegerResponseEntity(result);
+    public void updateUser(@RequestBody User user) {
+        userService.updateUser(user);
     }
 
     @DeleteMapping(path = "{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable("userId") UUID userId) {
-        int result = userService.removeUser(userId);
-        return getIntegerResponseEntity(result);
+    public void deleteUser(@PathVariable("userId") UUID userId) {
+        userService.removeUser(userId);
     }
 
     private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
