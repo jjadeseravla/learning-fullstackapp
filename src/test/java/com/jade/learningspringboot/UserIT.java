@@ -38,22 +38,6 @@ class UserIT {
 		assertThat(users.get(1).getUserId()).isNotNull();
 	}
 
-//	@Test
-//	public void shouldInsertUser() {
-//		//given
-//		UUID userLiamId = UUID.randomUUID();
-//		User liam = new User(userLiamId,
-//				"Liam",
-//				User.Gender.MALE,
-//				37);
-//		//when
-//		userController.insertNewUser(liam);
-//
-//		//then
-//		ResponseEntity<?> responseEntity = userController.fetchUser(userLiamId);
-//
-//	}
-
 	@Test
 	public void shouldFetchUsersByGender() {
 		//Given
@@ -76,6 +60,23 @@ class UserIT {
 		assertThat(males).extracting("userId").contains(liam.getUserId());
 		assertThat(males).extracting("name").contains(liam.getName());
 		assertThat(males).extracting("age").contains(liam.getAge());
+
+	}
+
+	@Test
+	public void shouldInsertUser() {
+		//given
+		UUID userLiamId = UUID.randomUUID();
+		User liam = new User(userLiamId,
+				"Liam",
+				User.Gender.MALE,
+				37);
+		//when
+		userController.insertNewUser(liam);
+		User fetchLiam = userController.fetchUser(userLiamId);
+
+		//then
+		assertThat(fetchLiam).isEqualToComparingFieldByField(liam);
 
 	}
 
