@@ -1,24 +1,27 @@
 import React from 'react';
 import './App.css';
-import { getAllUsers } from './client';
+import { DisplayUsers } from "./components/DisplayUsers";
 
 function App() {
-    //
-    //     getAllUsers()
-    //         .then(res => res.json()
-    //             .then(users => {
-    //     console.log(users);
-    // }))
 
-    getAllUsers()
-        .then(res => res.text()
-            .then(users => {
-                console.log("ooooo" + users);
-            }))
+    // const [state, setState] = useState([]);
+    //
+    // useEffect(() => {
+    //     fetchUsers();
+    // }, []);
+    //
+    // function fetchUsers() {
+    //     getAllUsers()
+    //         .then(res => res.text()
+    //             .then(users => {
+    //                 console.log("users: " + users);
+    //             }))
+    // }
 
   return (
     <div className="App">
-        <h1>work bitch</h1>
+        <h1>USERS</h1>
+        <DisplayUsers/>
     </div>
   );
 }
