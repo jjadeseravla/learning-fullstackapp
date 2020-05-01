@@ -1,6 +1,7 @@
 import React from 'react';
 
 export function UserTable(props) {
+    console.log("*****************************" + JSON.stringify(props.users));
     return (
         <table>
             <thead>
@@ -12,13 +13,14 @@ export function UserTable(props) {
             <tbody>
             { Object.keys(props.users).length > 0 ? (
                 props.users.map(user => {
-                    const {name, DOB} = user;
+                    const {name, age} = user;
                     return (
                         <tr>
                             <td>{name}</td>
-                            <td>{DOB}</td>
+                            {/*<td>{new Date().getFullYear() - props.userAge}</td>*/}
+                            <td>{JSON.stringify(props.dateOfBirth)}</td>
                             <td>
-                                <button onClick={() => props.deleteUser(id)}>Delete</button>
+                                <button>Delete</button>
                                 <button>Edit</button>
                             </td>
                         </tr>

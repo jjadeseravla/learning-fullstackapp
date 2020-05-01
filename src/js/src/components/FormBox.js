@@ -3,11 +3,11 @@ import { Form, FormGroup, Input } from "reactstrap";
 
 export function FormBox() {
     const [userName, setUserName] = React.useState("");
-    const [userDOB, setUserDOB] = React.useState("");
+    const [userAge, setUserAge] = React.useState("");
     const [loading] = React.useState(false);
 
     return (
-
+        <div className="six columns">
         <Form
             onSubmit={e => {
                 e.preventDefault();
@@ -19,24 +19,27 @@ export function FormBox() {
             <FormGroup>
                 <Input
                     type="name"
-                    name="email"
+                    name="name"
                     value={userName}
                     placeholder="john"
                     onChange={e => setUserName(e.target.value)}
                 />
             </FormGroup>
+
             <FormGroup>
                 <Input
-                    type="DOB"
-                    name="DOB"
-                    value={userDOB}
-                    placeholder="1991"
-                    onChange={e => setUserDOB(e.target.value)}
+                    type="age"
+                    name="age"
+                    value={userAge}
+                    placeholder="20"
+                    onChange={e => setUserAge(e.target.value)}
                 />
             </FormGroup>
+
             <button className="button-primary" type="submit" disabled={loading} block={true}>
                 {loading ? "Loading..." : "Enter"}
             </button>
         </Form>
+    </div>
     );
 }

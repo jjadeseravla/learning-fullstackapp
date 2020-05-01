@@ -7,12 +7,12 @@ function App() {
 
   return (
     <div className="container">
-        <h1>USERS</h1>
+        <h1>People who Use</h1>
         <div className="row">
             <div className="five columns">
                 <h2>Add user</h2>
             </div>
-            <div className="seven columns">
+            <div className="six columns">
                 <h2>View users</h2>
             </div>
         </div>
