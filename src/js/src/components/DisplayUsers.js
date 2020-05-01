@@ -22,7 +22,7 @@ export function DisplayUsers() {
     }
 
     return (
-        <div className="App">
+        <div>
             {state.users.map((user, index) =>
             <div key={index}>
                 {user.name}

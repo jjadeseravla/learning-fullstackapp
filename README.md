@@ -14,6 +14,9 @@ Run jar on the command line:
 If you want to override the specified port.  You can type this again with another port and have two instances of the app are running at the same time on different ports:
 ```java -jar learning-spring-boot-0.0.1-SNAPSHOT.jar --server.port=5050```</br>
 
+Navigate to ```src/js``` and start the front end:
+```yarn start```</br>
+
 ## To Do:
 - Front end!
 - Deploying to the cloud like AWS etc (or use Spring own version: Cloud Foundry)

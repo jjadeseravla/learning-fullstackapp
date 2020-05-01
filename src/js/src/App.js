@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { DisplayUsers } from "./components/DisplayUsers";
+import { FormBox } from "./components/FormBox";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
   return (
     <div className="App">
         <h1>USERS</h1>
+        <FormBox/>
         <DisplayUsers/>
     </div>
   );
