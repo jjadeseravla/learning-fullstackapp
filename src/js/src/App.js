@@ -20,8 +20,16 @@ function App() {
     // }
 
   return (
-    <div className="App">
+    <div className="container">
         <h1>USERS</h1>
+        <div className="row">
+            <div className="five columns">
+                <h2>Add user</h2>
+            </div>
+            <div className="seven columns">
+                <h2>View users</h2>
+            </div>
+        </div>
         <FormBox/>
         <DisplayUsers/>
     </div>
