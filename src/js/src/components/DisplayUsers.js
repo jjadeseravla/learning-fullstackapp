@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers } from './client';
+import { UserTable } from "./UserTable";
 
 export function DisplayUsers() {
 
-    const [state, setState] = useState({users: []});
+    // const [users, setUsers] = useState(userList);
+    const [userState, setUserState] = useState({users: []});
 
     useEffect(() => {
         fetchUsers();
@@ -13,7 +15,7 @@ export function DisplayUsers() {
         getAllUsers() //fetch('http://localhost:8080...)
             .then(res => res.json())
                 .then(users => {
-                    setState({
+                    setUserState({
                         users: users
                     }, () => {
                     console.log("users: " + users);
@@ -23,7 +25,9 @@ export function DisplayUsers() {
 
     return (
         <div>
-            {state.users.map((user, index) =>
+            {/*<UserTable userState={userState}/>*/}
+            <UserTable {...userState}/>
+            {userState.users.map((user, index) =>
             <div key={index}>
                 {user.name}
                 {user.age}
