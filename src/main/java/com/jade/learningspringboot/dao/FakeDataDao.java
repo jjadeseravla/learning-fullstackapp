@@ -18,6 +18,11 @@ public class FakeDataDao implements UserDao {
                         "Jade",
                         User.Gender.FEMALE,
                         29));
+        db.put(userId,
+                new User(userId,
+                        "Ben",
+                        User.Gender.MALE,
+                        17));
     }
 
     @Override

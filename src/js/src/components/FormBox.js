@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Form, FormGroup, Input } from "reactstrap";
 
 export function FormBox() {
     const [userName, setUserName] = React.useState("");
@@ -7,13 +7,14 @@ export function FormBox() {
     const [loading] = React.useState(false);
 
     return (
+
         <Form
             onSubmit={e => {
                 e.preventDefault();
                 // Auth handler
             }}
         >
-            <h1>Enter your name and date of birth:</h1>
+            <label>Enter your name and date of birth:</label>
             <br />
             <FormGroup>
                 <Input
@@ -33,9 +34,9 @@ export function FormBox() {
                     onChange={e => setUserDOB(e.target.value)}
                 />
             </FormGroup>
-            <Button type="submit" disabled={loading} block={true}>
+            <button className="button-primary" type="submit" disabled={loading} block={true}>
                 {loading ? "Loading..." : "Enter"}
-            </Button>
+            </button>
         </Form>
     );
 }

@@ -18,7 +18,7 @@ export function UserTable(props) {
                             <td>{name}</td>
                             <td>{DOB}</td>
                             <td>
-                                <button>Delete</button>
+                                <button onClick={() => props.deleteUser(id)}>Delete</button>
                                 <button>Edit</button>
                             </td>
                         </tr>
