@@ -11,10 +11,10 @@ export function UserTable(props) {
             </thead>
             <tbody>
             { props.users.length > 0 ? (
-                props.users.map(user => {
+                props.users.map((user, index) => {
                     const {id, name} = user;
                     return (
-                        <tr>
+                        <tr key={index}>
                             <td>{id}</td>
                             <td>{name}</td>
                             <td>
