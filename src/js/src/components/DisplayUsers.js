@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers } from './client';
 import { UserTable } from "./UserTable";
+import { AddUserForm } from "./AddUserForm"
 
 export function DisplayUsers(props) {
 
@@ -39,23 +40,29 @@ export function DisplayUsers(props) {
     //     setData({...data});
      }
 
+    const addUser = user => {
+        // user.id = users.length + 1;
+        setUserState([...userState, userState.users.length + 1]);
+    }
+
+
     return (
         <div>
             <UserTable {...userState}/>
-            <AddUserForm {...addUser}/>
+            <AddUserForm addUser={addUser}/>
 
-            <form>
-                <label>Name</label>
-                <input className="u-full-width" type="text" value={e.target.value} name="name" onChange={handleChange} />
-                <button className="button-primary" type="submit" onClick={handleSubmit} >Add user</button>
-            </form>
+            {/*<form>*/}
+            {/*    <label>Name</label>*/}
+            {/*    <input className="u-full-width" type="text" value={e.target.value} name="name" onChange={handleChange} />*/}
+            {/*    <button className="button-primary" type="submit" onClick={handleSubmit} >Add user</button>*/}
+            {/*</form>*/}
 
-            {userState.users.map((user, index) =>
-                <div key={index}>
-                    {user.name}
-                    {user.age}
-                </div>
-            )}
+            {/*{userState.users.map((user, index) =>*/}
+            {/*    <div key={index}>*/}
+            {/*        {user.name}*/}
+            {/*        {user.age}*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
     );
 }

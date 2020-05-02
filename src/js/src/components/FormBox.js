@@ -1,6 +1,8 @@
 import * as React from "react";
 import {Form, FormGroup, Input} from "reactstrap";
-import {addNewUsar, addNewUser} from "./client";
+import {addNewUser} from "./client";
+import {AddUserForm} from "./AddUserForm";
+
 
 export function FormBox() {
     const [userName, setUserName] = React.useState("");
