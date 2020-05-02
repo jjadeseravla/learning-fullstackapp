@@ -1,25 +1,28 @@
 import React from 'react';
 
-export function UserTable(props) {
+const UserTable = (props) => {
     return (
         <table>
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Username</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             { props.users.length > 0 ? (
-                props.users.map((user, index) => {
-                    const {id, name} = user;
+                props.users.map(user => {
+                    const {id, name, username} = user;
                     return (
-                        <tr key={index}>
+                        <tr key={id}>
                             <td>{id}</td>
                             <td>{name}</td>
+                            <td>{username}</td>
                             <td>
-                                <button>Delete</button>
-                                <button>Edit</button>
+                                <button onClick={() => props.deleteUser(id)}>Delete</button>
+                                <button onClick={() => props.editUser(id, user)}>Edit</button>
                             </td>
                         </tr>
                     )
@@ -34,3 +37,5 @@ export function UserTable(props) {
         </table>
     )
 }
+
+export default UserTable;
