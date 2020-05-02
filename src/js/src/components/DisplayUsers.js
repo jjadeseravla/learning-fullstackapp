@@ -42,20 +42,20 @@ export function DisplayUsers(props) {
     return (
         <div>
             <UserTable {...userState}/>
-            {/*<AddUserForm {...addUser}/>*/}
+            <AddUserForm {...addUser}/>
 
-            {/*<form>*/}
-            {/*    <label>Name</label>*/}
-                {/*<input className="u-full-width" type="text" value={e.target.value} name="name" onChange={handleChange} />*/}
-                {/*<button className="button-primary" type="submit" onClick={handleSubmit} >Add user</button>*/}
-            {/*</form>*/}
+            <form>
+                <label>Name</label>
+                <input className="u-full-width" type="text" value={e.target.value} name="name" onChange={handleChange} />
+                <button className="button-primary" type="submit" onClick={handleSubmit} >Add user</button>
+            </form>
 
-            {/*{userState.users.map((user, index) =>*/}
-            {/*    <div key={index}>*/}
-            {/*        {user.name}*/}
-            {/*        {user.age}*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            {userState.users.map((user, index) =>
+                <div key={index}>
+                    {user.name}
+                    {user.age}
+                </div>
+            )}
         </div>
     );
 }
