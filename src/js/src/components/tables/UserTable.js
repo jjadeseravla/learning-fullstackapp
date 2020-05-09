@@ -1,6 +1,8 @@
 import React from 'react';
 
+//CHILD of DisplayPage
 const UserTable = (props) => {
+
     return (
         <table>
             <thead>
@@ -28,7 +30,7 @@ const UserTable = (props) => {
                     )
                 })
             ) : (
-                <tr>
+                <tr key={""}>
                     <td colSpan={4}>No users found</td>
                 </tr>
             )
