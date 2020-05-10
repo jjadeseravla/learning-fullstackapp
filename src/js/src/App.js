@@ -1,25 +1,14 @@
-import React, {useState} from 'react';
-import './App.css';
-import { DisplayUsers } from "./components/DisplayUsers";
-import { FormBox } from "./components/FormBox";
+import React from 'react';
+import DisplayPage from "./components/DisplayPage";
 
-function App() {
+const App = () => {
 
-  return (
-    <div className="container">
-        <h1>People who Use</h1>
-        <div className="row">
-            <div className="five columns">
-                <h2>Add user</h2>
-            </div>
-            <div className="six columns">
-                <h2>View users</h2>
-            </div>
+    return (
+        <div className="container">
+            <DisplayPage/>
         </div>
-        <FormBox/>
-        <DisplayUsers/>
-    </div>
-  );
+    )
 }
 
 export default App;
+
