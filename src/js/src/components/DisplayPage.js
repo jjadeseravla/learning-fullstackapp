@@ -2,41 +2,54 @@ import React, {useEffect, useState} from 'react'
 import UserTable from './tables/UserTable';
 import AddUserForm from './forms/AddUserForm';
 import EditUserForm from './forms/EditUserForm';
-import {getAllUsers} from "../client";
+import {getAllUsers, deleteUser} from "../client";
 
 //PARENT
 const DisplayPage = () => {
-
-    //const [users, setUsers] = useState(props);
 
     const [usersState, setUsersState] = useState({users: []});
 
     useEffect(() => {
         fetchUsers();
+        //deleteAUser(userId);
     }, []);
 
     function fetchUsers() {
         getAllUsers() //fetch('http://localhost:8080...)
             .then(res => res.json())
             .then(users => {
-                //console.log("*****" + users)
                 setUsersState({
                     users: users
-                    //}, () => {
-                    //console.log("users: " + users);
                 })
+                //console.log(users);
 
+                //console.log(users[0].userId)
             })
     }
 
-
-    const addUser = user => {
-        // user.id = users.length + 1;
-        // setUsers([...users, user]);
+    function deleteAUser(userId) {
+        console.log(userId)
+        deleteUser(userId).then(() => {
+            alert(`${userId} was deleted`);
+            fetchUsers();
+        }).catch(err => {
+            alert(err);
+        });
     }
 
-    const deleteUser = id => {
-        // setUsers(users.filter(user => user.id !== id));
+    //console.log(usersState.users.userId)
+    console.log(usersState)
+
+
+    const addUser = (usersState) => {
+    //const count = usersState.filter(item => item.name === '0').length;
+        //user.userId = users.length + 1;
+
+        //console.log(usersState)
+       // const counterId = count + 1;
+         //console.log(usersState.users);
+
+        //setUsersState(...usersState, usersState);
     }
 
     const [editing, setEditing] = useState(false);
@@ -56,7 +69,7 @@ const DisplayPage = () => {
         // setEditing(false)
     }
 
-    console.log(usersState.users);
+    //console.log({usersState.users});
 
     return (
         <div className="container">
@@ -81,8 +94,12 @@ const DisplayPage = () => {
                 </div>
                 <div className="seven columns">
                     <h2>View users</h2>
-               {/*<DataList users={usersState.users} deleteUser={deleteUser} editUser={editUser}/>*/}
-                    <UserTable users={usersState.users} deleteUser={deleteUser} editUser={editUser} />
+                    {/*how to pass props to userTable is seen below: */}
+                    <UserTable //component
+                        users={usersState.users} //1 props
+                        deleteAUser={deleteAUser} //2 props(no need for parameters)
+                        editUser={editUser} //3 props
+                    />
                 </div>
             </div>
         </div>
