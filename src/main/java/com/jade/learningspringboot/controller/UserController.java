@@ -63,7 +63,7 @@ public class UserController {
         userService.insertUser(user);
     }
 
-    @PutMapping
+    @PutMapping(path = "{userId}")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }

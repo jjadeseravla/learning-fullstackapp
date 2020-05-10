@@ -3,8 +3,6 @@ import React from 'react';
 //CHILD of DisplayPage
 const UserTable = (props) => {
 
-    //console.log(props)
-
     return (
         <table>
             <thead>
@@ -30,7 +28,11 @@ const UserTable = (props) => {
                             <td>
                                 {/*<button type="danger" onClick={props.deleteAUser(userId)}>Delete</button>*/}
                                 <button type="danger" onClick={() => props.deleteAUser(userId)}>Delete</button>
-                                <button onClick={() => props.editUser(userId, user)}>Edit</button>
+                                <button onClick={() => {
+                                    console.log(user)
+                                    props.showEditForm(user)
+                                }
+                                }>Edit</button>
                             </td>
                         </tr>
                     )
