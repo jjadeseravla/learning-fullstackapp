@@ -72,7 +72,7 @@ const DisplayPage = () => {
 
     return (
         <div className="container">
-            <h1>CRUD App of React Hooks and Java Backend</h1>
+            <h1 data-testid="app-title">CRUD App of React Hooks and Java Backend</h1>
             <div className="row">
                 <div className="five columns">
                     { editedUsersState.userEdited ? (
