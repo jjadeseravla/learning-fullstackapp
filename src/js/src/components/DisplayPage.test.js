@@ -1,4 +1,24 @@
-// import React from 'react';
+import React from 'react';
+
+import Enzyme, {mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({adapter: new Adapter()});
+
+import DisplayPage from "./DisplayPage";
+
+describe("DisplayPage", () => {
+    const fetchUsers = jest.fn();
+    let wrapper;
+    beforeEach(() => {
+        wrapper = mount(<DisplayPage fetchUsers={fetchUsers}/>)
+    })
+
+    it('renders', () => {
+        expect(wrapper).not.toBeNull();
+    });
+});
+
+
 // // import ReactDOM from 'react-dom';
 // import {render, getByTestId, fireEvent, cleanup, waitFor, screen} from '@testing-library/react';
 // import App from '../App'
@@ -26,36 +46,36 @@
 //     })
 //
 // })
-
-import React from "react";
-import { fetchUsers } from "./DisplayPage";
-import "whatwg-fetch";
-import { renderHook } from "@testing-library/react-hooks";
-import fetchMock from "fetch-mock";
-import { act } from "react-test-renderer";
-
-describe("DisplayPage", () => {
-    beforeAll(() => {
-        global.fetch = fetch;
-    });
-    afterAll(() => {
-        fetchMock.restore();
-    });
-
-    it("should return data with a successful api request", async () => {
-        const { result } = renderHook(() => fetchUsers());
-        // Tell the test that any request to 'test.com' should return 'returnedData: "foo"'
-        fetchMock.mock("test.com", {
-            returnedData: "foo"
-        });
-        // Calling the api via the `callApi` function
-        await act(async () => {
-            result.current.callApi("test.com");
-        });
-
-        // Check the 'data' state variable has the same mocked data from earlier
-        expect(result.current.data).toBe({
-            returnedData: "foo"
-        });
-    });
-});
+//
+// import React from "react";
+// import { fetchUsers } from "./DisplayPage";
+// import "whatwg-fetch";
+// import { renderHook } from "@testing-library/react-hooks";
+// import fetchMock from "fetch-mock";
+// import { act } from "react-test-renderer";
+//
+// describe("DisplayPage", () => {
+//     beforeAll(() => {
+//         global.fetch = fetch;
+//     });
+//     afterAll(() => {
+//         fetchMock.restore();
+//     });
+//
+//     it("should return data with a successful api request", async () => {
+//         const { result } = renderHook(() => fetchUsers());
+//         // Tell the test that any request to 'test.com' should return 'returnedData: "foo"'
+//         fetchMock.mock("test.com", {
+//             returnedData: "foo"
+//         });
+//         // Calling the api via the `callApi` function
+//         await act(async () => {
+//             result.current.callApi("test.com");
+//         });
+//
+//         // Check the 'data' state variable has the same mocked data from earlier
+//         expect(result.current.data).toBe({
+//             returnedData: "foo"
+//         });
+//     });
+//});
