@@ -12,7 +12,6 @@ const DisplayPage = () => {
 
     useEffect(() => {
         fetchUsers();
-        //deleteAUser(userId);
     }, []);
 
     function fetchUsers() {
