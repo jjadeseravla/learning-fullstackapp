@@ -8,7 +8,7 @@ const EditUserForm = (props) => {
 
     const [user, setUser] = useState(props.currentUser);
 
-    const handleChange = e => {
+    const handleChange = e => { //destructuring
         const {name, value} = e.target;
         setUser({...user, [name]: value});
     }
@@ -16,16 +16,17 @@ const EditUserForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (user.name && user.gender && user.age) props.editAUser(user);
+        console.log(props.editAUser(user));
     }
 
     return (
         <form>
-            <label>Name</label>
-            <input className="u-full-width" type="text" value={user.name} name="name" onChange={handleChange} />
-            <label>Gender</label>
-            <input className="u-full-width" type="text" value={user.gender} name="gender"onChange={handleChange} />
-            <label>Age</label>
-            <input className="u-full-width" type="text" value={user.age} name="age" onChange={handleChange} />
+            <label>Edit the Name</label>
+            <input className="u-full-width" type="text" value={user.name} name="Edit the name" onChange={handleChange} />
+            <label>Edit the Gender</label>
+            <input className="u-full-width" type="text" value={user.gender} name="Edit the gender"onChange={handleChange} />
+            <label>Edit the Age</label>
+            <input className="u-full-width" type="text" value={user.age} name="Edit the age" onChange={handleChange} />
             <button className="button-primary" type="submit" onClick={handleSubmit} >Edit user</button>
             <button type="submit" onClick={() => props.closeForm} >Cancel</button>
         </form>

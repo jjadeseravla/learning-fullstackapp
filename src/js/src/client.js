@@ -2,7 +2,7 @@ import fetch from 'unfetch';
 
 export const getAllUsers = () => fetch('/api/v1/users');
 
-export const addNewUser = (user) =>
+export const insertNewUser = (user) =>
     fetch('api/v1/users', {
         headers: {
             'Content-Type': 'application/json'

@@ -31,6 +31,7 @@ const UserTable = (props) => {
                                 <button onClick={() => {
                                     console.log(user)
                                     props.showEditForm(user)
+                                    //props.showAddUser(user)
                                 }
                                 }>Edit</button>
                             </td>
