@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({adapter: new Adapter()});
 
 import DisplayPage from "./DisplayPage";
+import UserTable from "./tables/UserTable";
 
 describe("DisplayPage", () => {
     const fetchUsers = jest.fn();
@@ -15,6 +16,16 @@ describe("DisplayPage", () => {
 
     it('renders', () => {
         expect(wrapper).not.toBeNull();
+    });
+
+    it('shows default title text of each user', () => {
+        // expect(wrapper.find('h2').text()).toEqual("View users");
+        expect(wrapper.find('UserTable').text()).toEqual("IDNameGenderDOBNo users found");
+    }) ;
+
+    it('shows default text', () => {
+        wrapper.find('button').simulate('click');
+        expect(wrapper.find('UserTable').text()).toEqual({users: []})
     });
 });
 

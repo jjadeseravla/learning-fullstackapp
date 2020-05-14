@@ -25,7 +25,7 @@ const AddUserForm = (props) => {
             <input className="u-full-width" type="text" value={user.gender} name="gender" onChange={handleChange}/>
             <label>Age</label>
             <input className="u-full-width" type="text" value={user.age} name="age" onChange={handleChange}/>
-            <button className="button-primary" type="submit" onClick={handleSubmit}>Add New user</button>
+            <button data-testid="add-new-user-button" className="button-primary" type="submit" onClick={handleSubmit}>Add New user</button>
             {/*<button type="submit" onClick={() => console.log(props)}>Test</button>*/}
         </form>
     )
