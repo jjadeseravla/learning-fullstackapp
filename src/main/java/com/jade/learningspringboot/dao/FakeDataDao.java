@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository //because the purpose of this class is to get some data from a repo(or db in this case)
+@Repository
+//@Repository("fakeDataDao") //because the purpose of this class is to get some data from a repo(or db in this case)
 public class FakeDataDao implements UserDao {
 
     private Map<UUID, User> db;

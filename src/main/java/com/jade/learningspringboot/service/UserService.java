@@ -4,6 +4,7 @@ import com.jade.learningspringboot.dao.FakeDataDao;
 import com.jade.learningspringboot.dao.UserDao;
 import com.jade.learningspringboot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
