@@ -17,6 +17,20 @@ If you want to override the specified port.  You can type this again with anothe
 Navigate to ```src/js``` and start the front end:
 ```yarn start```</br>
 
+## Docker:
+Once you have postgres installed, start an instance.  Name container and environment variable to set the password, then the image and expose the port running inside the docker container to the outside world:
+```docker run --name postgres-spring -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:alpine``` creates postgres-spring container exposing a port on 5432</br>
+Exposing the container port to outside world:
+```docker port postgres-spring```</br>
+Bash into the container and create a db:
+```docker exec -it {containerId] bin/bash```</br>
+```psql -U {name eg posrgres}```</br>
+create db:
+```CREATE DATABASE userdb;```</br>
+connect to this db:
+```\c userdb```</br>
+
+
 ## To Do:
-- Front end!
+- Front end bug and tests
 - Deploying to the cloud like AWS etc (or use Spring own version: Cloud Foundry)
