@@ -34,5 +34,9 @@ describe("DisplayPage" ,() => {
         expect(appTable).toBeDefined();
     })
 
+    it("should fetch all the users", () => {
+
+    })
+
 })
 
