@@ -18,13 +18,21 @@ import {render, getByTestId, fireEvent, cleanup} from '@testing-library/react';
 // })
 
 describe("DisplayPage" ,() => {
-    it("should have a title", () => {
+    it("should have expected title", () => {
         //given
-        const title = "CRUD App of React Hooks and Java Backend";
+        const expectedTitle = "CRUD App of React Hooks and Java Backend";
         const { container } = render(<DisplayPage/>);
         //when
         const appTitle = getByTestId(container, "app-title");
         //then
-        expect(appTitle.textContent).toBe(title);
+        expect(appTitle.textContent).toBe(expectedTitle);
     })
+
+    it("should call the render for the UserTable component", () => {
+        const { container } = render(<DisplayPage/>);
+        const appTable = getByTestId(container, "app-table");
+        expect(appTable).toBeDefined();
+    })
+
 })
+

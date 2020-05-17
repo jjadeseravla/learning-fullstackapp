@@ -4,7 +4,7 @@ import React from 'react';
 const UserTable = (props) => {
 
     return (
-        <table>
+        <table data-testid="app-table">
             <thead>
             <tr>
                 <th>ID</th>
