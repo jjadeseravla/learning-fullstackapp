@@ -40,9 +40,9 @@ describe("AddUserForm" ,() => {
         const addUserButton = getByTestId(container, "addUserButton");
 
         fireEvent.change(appAddName, {target:{value: "a random string"}})
-
         fireEvent.change(appAddGender, {target:{value: "FEMALE"}})
         fireEvent.change(appAddAge, {target:{value: 38}})
+
         fireEvent.click(addUserButton);
 
         expect(addUserButton).toBeDefined();

@@ -24,13 +24,17 @@ const EditUserForm = (props) => {
     return (
         <form>
             <label>Edit the Name</label>
-            <input className="u-full-width" type="text" value={user.name} name="name" onChange={handleChange} />
+            <input data-testid="app-editName" className="u-full-width" type="text" value={user.name} name="name" onChange={handleChange} />
             <label>Edit the Gender</label>
-            <input className="u-full-width" type="text" value={user.gender} name="gender"onChange={handleChange} />
+            <input data-testid="app-editGender" className="u-full-width" type="text" value={user.gender} name="gender"onChange={handleChange} />
             <label>Edit the Age</label>
-            <input className="u-full-width" type="text" value={user.age} name="age" onChange={handleChange} />
-            <button className="button-primary" type="submit" onClick={handleSubmit} >Edit user</button>
-            <button type="submit" onClick={() => props.closeForm} >Cancel</button>
+            <input data-testid="app-editAge" className="u-full-width" type="text" value={user.age} name="age" onChange={handleChange} />
+            <button data-testid="editUserButton" className="button-primary" type="submit" onClick={handleSubmit} >Edit user</button>
+            <button data-testid="editCancelButton" type="submit" onClick={(e) => {
+                e.preventDefault()
+                props.closeForm()
+                }
+            } >Cancel</button>
         </form>
     )
 }
