@@ -9,8 +9,10 @@ const EditUserForm = (props) => {
     const [user, setUser] = useState(props.currentUser);
 
     const handleChange = e => { //destructuring
-        const {name, value} = e.target;
-        setUser({...user, [name]: value});
+        //const {name, value} = e.target; //html input field
+        const value = e.target.value; //inputField = e.target
+        const inputName = e.target.name;
+        setUser({...user, [inputName]: value});
     }
 
     const handleSubmit = e => {
