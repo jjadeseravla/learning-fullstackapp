@@ -18,6 +18,7 @@ const UserTable = (props) => {
                 props.users.map(user => {
                     // const {id, name, username} = user;
                     const {userId, name, gender, dateofBirth} = user;
+                    console.log(props);
                     return (
                         <tr key={userId}>
                             <td>{userId}</td>
@@ -26,9 +27,8 @@ const UserTable = (props) => {
                             <td>{dateofBirth}</td>
                             {/*cos thats what you get from backend*/}
                             <td>
-                                {/*<button type="danger" onClick={props.deleteAUser(userId)}>Delete</button>*/}
-                                <button type="danger" onClick={() => props.deleteAUser(userId)}>Delete</button>
-                                <button onClick={() => {
+                                <button data-testid="userTableDeleteButton" type="danger" onClick={() => props.deleteAUser(userId)}>Delete</button>
+                                <button data-testid="userTableEditButton" onClick={() => {
                                     console.log(user)
                                     props.showEditForm(user)
                                     //props.showAddUser(user)

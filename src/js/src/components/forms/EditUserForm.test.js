@@ -53,11 +53,9 @@ describe("EditUserForm", () => {
             "gender": "MALE",
             "name": "edited random string",
         });
-
     });
 
     it("should hide the edit form when the cancel button is pushed", () => {
-
          const mockCloseForm = jest.fn();
         // const mockCloseForm = () => {
         //     console.log("beautiful angel")
@@ -71,8 +69,6 @@ describe("EditUserForm", () => {
 
         expect(editCancelButton).toBeDefined();
         expect(mockCloseForm).toHaveBeenCalled();
-
     })
-
 
 });

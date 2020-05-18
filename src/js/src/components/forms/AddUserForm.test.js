@@ -47,6 +47,5 @@ describe("AddUserForm" ,() => {
 
         expect(addUserButton).toBeDefined();
         expect(addNewUserMock).toHaveBeenCalled();
-
     });
 });
