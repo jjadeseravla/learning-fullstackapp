@@ -24,7 +24,7 @@ Exposing the container port to outside world:
 ```docker port postgres-spring```</br>
 Bash into the container and create a db:
 ```docker exec -it {containerId] bin/bash```</br>
-```psql -U {name eg posrgres}```</br>
+```psql -U {name eg postgres}```</br>
 create db:
 ```CREATE DATABASE userdb;```</br>
 connect to this db:
