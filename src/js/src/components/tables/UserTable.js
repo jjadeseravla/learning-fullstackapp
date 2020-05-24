@@ -20,18 +20,17 @@ const UserTable = (props) => {
                     const {userId, name, gender, dateofBirth} = user;
                     console.log(props);
                     return (
-                        <tr key={userId}>
-                            <td>{userId}</td>
-                            <td>{name}</td>
-                            <td>{gender}</td>
-                            <td>{dateofBirth}</td>
+                        <tr key={userId} data-testid={userId}>
+                            <td data-testid="app-id">{userId}</td>
+                            <td data-testid="app-name">{name}</td>
+                            <td data-testid="app-gender">{gender}</td>
+                            <td data-testid="app-dateofBirth">{dateofBirth}</td>
                             {/*cos thats what you get from backend*/}
                             <td>
-                                <button data-testid="userTableDeleteButton" type="danger" onClick={() => props.deleteAUser(userId)}>Delete</button>
-                                <button data-testid="userTableEditButton" onClick={() => {
+                                <button data-testid="userTable-DeleteButton" onClick={() => props.deleteAUser(userId)}>Delete</button>
+                                <button data-testid="userTable-EditButton" onClick={() => {
                                     console.log(user)
                                     props.showEditForm(user)
-                                    //props.showAddUser(user)
                                 }
                                 }>Edit</button>
                             </td>

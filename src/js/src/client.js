@@ -1,9 +1,12 @@
 import fetch from 'unfetch';
 
-export const getAllUsers = () => fetch('/api/v1/users');
+export const getAllUsers = () => {
+    //console.log(fetch);
+    return fetch('/api/v1/users')
+};
 
 export const insertNewUser = (user) =>
-    fetch('api/v1/users', {
+    fetch('/api/v1/users', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -13,7 +16,7 @@ export const insertNewUser = (user) =>
     });
 
 export const deleteUser = (userId) => //no curly brackets means it returns what fetch returns
-    fetch(`api/v1/users/${userId}`, {
+    fetch(`/api/v1/users/${userId}`, {
         method: 'DELETE'
     });
 
@@ -25,7 +28,7 @@ export const deleteUser = (userId) => //no curly brackets means it returns what 
 
 export const updateUser = (user) => {
     //user.age = 20
-    return fetch(`api/v1/users/${user.userId}`, {
+    return fetch(`/pi/v1/users/${user.userId}`, {
         headers: {
             'Content-Type': 'application/json'
         },
